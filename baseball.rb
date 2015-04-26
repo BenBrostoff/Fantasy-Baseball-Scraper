@@ -39,17 +39,18 @@ def scrape(link, threshold)
   return message_body += '</ul>'
 end
 
- def summary(available)
+ def summary(available, email)
   {  
-   :subject=> "#{Time.now} Pitcher / Catcher Update",  
+   :subject=> "#{Time.now} Position Player Update",  
    :html => available,
    :to=>[  
      {  
-       :email=> "ben.brostoff@gmail.com"  
+       :email=> email  
      }  
    ],  
-   :from_email=>"ben.brostoff@gmail.com"  
+   :from_email=> email  
   }  
 end
 
-email_client.messages.send(summary(scrape(available, 5)))
+email_client.messages.send(summary(scrape(available, 5), 
+                           'ben.brostoff@gmail.com'))

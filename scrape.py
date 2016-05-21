@@ -5,13 +5,15 @@ import unicodedata
 import logging
 import requests as r
 from bs4 import BeautifulSoup as BS
-import mandrill
+import sendgrid
 
 _log = logging.getLogger(__name__)
 _log.addHandler(logging.StreamHandler())
 _log.setLevel(logging.DEBUG)
 
-email_client = mandrill.Mandrill(environ.get('MANDRILL_KEY'))
+_MY_EMAIL = 'ben.brostoff@gmail.com'
+_SGRID_KEY = environ.get('SGRID_KEY')
+_EMAIL_CLIENT = sendgrid.SendGridClient(_SGRID_KEY)
 
 Player = namedtuple('Player', 'name owned picked_up')
 _batters = {
@@ -63,13 +65,13 @@ def _scrape():
     return html
 
 def send():
-    message = {
-        'to': [{'email': 'ben.brostoff@gmail.com'}],
-        'from_email': 'ben.brostoff@gmail.com',
-        'html': _scrape(),
-        'subject': datetime.now().strftime("%B %d, %Y") + ' FB2016 Report'
-    }
-    email_client.messages.send(message=message)
+    message = sendgrid.Mail()
+    message.add_to(_MY_EMAIL)
+    message.set_from(_MY_EMAIL)
+    message.set_subject(datetime.now().strftime("%B %d, %Y") + ' FB2016 Report')
+    message.set_html(_scrape())
+    sent = _EMAIL_CLIENT.send(message)
+    _log.info(sent)
 
 if __name__ == '__main__':
     send()

@@ -13,4 +13,4 @@ query_by_pos('SS')
 query_by_name('Trout')
 ```
 
-<code>scrape.rb</code> - Scrapes ESPN for most picked up players. 
+<code>scrape.py</code> - Scrapes ESPN for most picked up players.

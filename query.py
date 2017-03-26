@@ -4,7 +4,7 @@ import collections, csv
 Player = collections.namedtuple('Person', 'name team pos val')
 _PLAYERS = []
 
-with open('2016.csv', 'rb') as csvfile:
+with open('2017.csv', 'rb') as csvfile:
         player_reader = csv.DictReader(csvfile)
         for row in player_reader:
             if '(' not in row['Dollars']:

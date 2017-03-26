@@ -1,6 +1,8 @@
 # Fantasy-Baseball-Stuff
 
-<code>query.py</code> - Useful for quickly querying CSV data.
+`query` assumes projection CSV format from [Auction Calculator via fangraphs]('http://www.fangraphs.com/auctiontool.aspx').
+
+`query.py` - Useful for quickly querying CSV data.
 
 ```python
 # top 10 players priced at $30 or below
@@ -13,4 +15,4 @@ query_by_pos('SS')
 query_by_name('Trout')
 ```
 
-<code>scrape.py</code> - Scrapes ESPN for most picked up players.
+`scrape.py` - Scrapes ESPN for most picked up players.
